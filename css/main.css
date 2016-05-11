@@ -59,3 +59,9 @@ textarea:focus {
 .cajaTarea input {
 	margin-right: 5px ;
 }
+
+#tareasrealizadas h5 {
+	background: #58FAAC ;
+	color : white ;
+	padding : 1% ;
+}

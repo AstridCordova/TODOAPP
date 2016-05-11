@@ -18,25 +18,21 @@ function doTarea (tareaText) {
 	var tarea = document.createElement("div") ;
 	tarea.className = "cajaTarea" ;
 
-	var boton = document.createElement("input") ;
-	boton.type = "checkbox" ;
-	boton.onchange = function tachar() {
-		if(boton.checked==true) {
-			texto.innerHTML = tareaText.strike() ;
-		}
-		else {
-			texto.innerHTML = tareaText ;
-		}
-	}
-
 	var texto = document.createElement("span") ;
 	texto.className = "texto" ;
 	texto.innerHTML = tareaText ;
 
+	var boton = document.createElement("input") ;
+	boton.type = "checkbox" ;
+	boton.onclick = function() {
+		tachar(this, tareaText);
+	}
+
+
 	var icono = document.createElement("button") ;
 	icono.className = "glyphicon glyphicon-trash pull-right" ;
-	icono.onclick = function deshacer() {
-		tareas.removeChild(tarea);
+	icono.onclick = function() {
+		deshacer(this)
 	}
 
 	tareas.appendChild(tarea);
@@ -50,3 +46,24 @@ function clean() {
 	boxTexto.value = "";
 	boxTexto.focus();
 }
+
+function tachar(boton, tareaText) {
+	var texto = boton.nextSibling;
+	if(boton.checked) {
+		texto.innerHTML = tareaText.strike() ;
+		var realizado = document.getElementById("tareasrealizadas")
+		var tarea = boton.parentElement;
+		realizado.appendChild(tarea);
+
+	}
+	else {
+		texto.innerHTML = tareaText ;
+		tareas.appendChild(tarea)
+	}
+}
+ 
+ function deshacer(icono) {
+ 		var tarea = icono.parentElement;
+ 		var tareas = tarea.parentElement; //parentElement es para llamara al padre del elemento
+		tareas.removeChild(tarea);
+	}
